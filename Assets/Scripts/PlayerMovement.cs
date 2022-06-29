@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,8 @@ namespace Assets.Scripts
         [SerializeField] float jumpSpeed = 10f;
         [SerializeField] private float climbSpeed = 10f;
 
+        private bool isAlive = true;
+
 
         void Start()
         {
@@ -32,9 +35,21 @@ namespace Assets.Scripts
 
         void Update()
         {
+            if (!isAlive)
+                return;
+
             Run();
             FlipSprite();
             ClimbLadder();
+            DieFromEnemy();
+        }
+
+        private void DieFromEnemy()
+        {
+            if (myPlayerCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+            {
+                isAlive = false;
+            }
         }
 
 
@@ -51,6 +66,8 @@ namespace Assets.Scripts
         // On Move Input
         void OnMove(InputValue value)
         {
+            if (!isAlive)
+                return;
             moveInput = value.Get<Vector2>();
             Debug.Log(moveInput);
         }
@@ -58,7 +75,9 @@ namespace Assets.Scripts
         // Adding Velocity
         void OnJump(InputValue value)
         {
-            // TODO - Implement Jump return using LayerMask.GetMask
+            if (!isAlive)
+                return;
+
             if (!myPlayerBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
                 return;
 
