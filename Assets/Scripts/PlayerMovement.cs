@@ -6,10 +6,12 @@ namespace Assets.Scripts
     public class PlayerMovement : MonoBehaviour
     {
         Vector2 moveInput;
+        Vector2 jumpInput;
 
         private Rigidbody2D myRigidBody;
         [SerializeField] float runSpeed = 10f;
         private Animator myAnimator;
+        [SerializeField] float jumpSpeed = 10f;
 
 
         void Start()
@@ -23,6 +25,18 @@ namespace Assets.Scripts
         {
             Run();
             FlipSprite();
+            Jump();
+            JumpAnimation();
+        }
+
+        private void JumpAnimation()
+        {
+            bool isPlayerMovementJump = Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon; // Epsilon is way of 0 
+
+            if (isPlayerMovementJump)
+            {
+                transform.localScale = new Vector2(1f, Mathf.Sign(myRigidBody.velocity.y));
+            }
         }
 
         private void FlipSprite()
@@ -40,6 +54,31 @@ namespace Assets.Scripts
         {
             moveInput = value.Get<Vector2>();
             Debug.Log(moveInput);
+        }
+
+        void OnJump(InputValue value)
+        {
+            if (value.isPressed)
+            {
+                myRigidBody.velocity += new Vector2(0f, )
+            }
+        }
+
+        void Jump()
+        {
+            Vector2 playerJump = new Vector2(myRigidBody.velocity.x, jumpInput.y * jumpSpeed);
+            myRigidBody.velocity = playerJump;
+
+            bool isPlayerJump = Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon; // Epsilon is way of 0
+
+            if (isPlayerJump)
+            {
+                myAnimator.SetBool("IsJump", true);
+            }
+            else
+            {
+                myAnimator.SetBool("IsJump", false);
+            }
         }
 
         void Run()
