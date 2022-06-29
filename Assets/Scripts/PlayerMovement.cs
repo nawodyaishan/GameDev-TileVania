@@ -12,7 +12,8 @@ namespace Assets.Scripts
 
         private Rigidbody2D myRigidBody;
         private Animator myAnimator;
-        private CapsuleCollider2D myPlayerCollider;
+        private CapsuleCollider2D myPlayerCapsuleCollider;
+        private BoxCollider2D myPlayerBoxCollider;
 
         [SerializeField] float runSpeed = 10f;
         [SerializeField] float jumpSpeed = 10f;
@@ -23,8 +24,9 @@ namespace Assets.Scripts
         {
             myRigidBody = GetComponent<Rigidbody2D>();
             myAnimator = GetComponent<Animator>();
-            myPlayerCollider = GetComponent<CapsuleCollider2D>();
+            myPlayerCapsuleCollider = GetComponent<CapsuleCollider2D>();
             gravityScaleAtStart = myRigidBody.gravityScale;
+            myPlayerBoxCollider = GetComponent<BoxCollider2D>();
         }
 
 
@@ -57,7 +59,7 @@ namespace Assets.Scripts
         void OnJump(InputValue value)
         {
             // TODO - Implement Jump return using LayerMask.GetMask
-            if (!myPlayerCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            if (!myPlayerBoxCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
                 return;
 
             if (value.isPressed)
@@ -88,7 +90,7 @@ namespace Assets.Scripts
 
         void ClimbLadder()
         {
-            if (!myPlayerCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+            if (!myPlayerBoxCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
             {
                 myRigidBody.gravityScale = gravityScaleAtStart;
                 myAnimator.SetBool("IsClimbing", false);
