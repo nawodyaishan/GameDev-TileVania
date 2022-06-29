@@ -9,8 +9,9 @@ namespace Assets.Scripts
         Vector2 jumpInput;
 
         private Rigidbody2D myRigidBody;
-        [SerializeField] float runSpeed = 10f;
         private Animator myAnimator;
+
+        [SerializeField] float runSpeed = 10f;
         [SerializeField] float jumpSpeed = 10f;
 
 
@@ -25,8 +26,6 @@ namespace Assets.Scripts
         {
             Run();
             FlipSprite();
-            Jump();
-            JumpAnimation();
         }
 
         private void JumpAnimation()
@@ -56,11 +55,12 @@ namespace Assets.Scripts
             Debug.Log(moveInput);
         }
 
+        // Adding Velocity
         void OnJump(InputValue value)
         {
             if (value.isPressed)
             {
-                myRigidBody.velocity += new Vector2(0f, )
+                myRigidBody.velocity += new Vector2(0f, jumpSpeed);
             }
         }
 
@@ -81,6 +81,7 @@ namespace Assets.Scripts
             }
         }
 
+        // Assigning Velocity
         void Run()
         {
             Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidBody.velocity.y);
