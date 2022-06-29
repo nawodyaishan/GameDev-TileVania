@@ -11,6 +11,9 @@ namespace Assets.Scripts
 
         private float gravityScaleAtStart;
 
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private GameObject gun;
+
         private Rigidbody2D myRigidBody;
         private Animator myAnimator;
         private CapsuleCollider2D myPlayerCapsuleCollider;
@@ -54,6 +57,13 @@ namespace Assets.Scripts
                 myAnimator.SetTrigger("Dying");
                 myRigidBody.velocity = deathVelocity;
             }
+        }
+
+        void OnFire(InputValue value)
+        {
+            if (!isAlive)
+                return;
+            Instantiate(bullet, gun.transform.position, transform.rotation);
         }
 
 
