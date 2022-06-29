@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Interactables
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Enemy
   - Hazards
   - Bullet
-  - 
+  - Interactables
   - 
   - 
   - 
@@ -60,4 +61,7 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 1159893461
+    locked: 0
+  - name: Interactables
+    uniqueID: 1242167203
     locked: 0
