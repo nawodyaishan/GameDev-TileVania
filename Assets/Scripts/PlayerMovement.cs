@@ -21,6 +21,7 @@ namespace Assets.Scripts
         [SerializeField] private float climbSpeed = 10f;
 
         private bool isAlive = true;
+        [SerializeField] private Vector2 deathVelocity = new Vector2(0f, 10f);
 
 
         void Start()
@@ -46,9 +47,12 @@ namespace Assets.Scripts
 
         private void DieFromEnemy()
         {
-            if (myPlayerCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+            if (myPlayerCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) ||
+                myPlayerBoxCollider.IsTouchingLayers(LayerMask.GetMask("Hazards")))
             {
                 isAlive = false;
+                myAnimator.SetTrigger("Dying");
+                myRigidBody.velocity = deathVelocity;
             }
         }
 
