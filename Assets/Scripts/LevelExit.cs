@@ -1,15 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
     public class LevelExit : MonoBehaviour
     {
-        void Start()
+        void OnTriggerEnter2D(Collider2D col)
         {
-        }
-
-        void Update()
-        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         }
     }
 }

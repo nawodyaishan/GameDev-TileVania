@@ -35,7 +35,6 @@ namespace Assets.Scripts
             {
                 Destroy(col.gameObject);
             }
-
             Destroy(gameObject);
         }
 
