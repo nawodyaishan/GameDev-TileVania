@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -25,6 +26,23 @@ namespace Assets.Scripts
         void Update()
         {
             myRigidbody.velocity = new Vector2(xSpeed, 0f);
+        }
+
+
+        void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.tag == "Enemy")
+            {
+                Destroy(col.gameObject);
+            }
+
+            Destroy(gameObject);
+        }
+
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+            Destroy(gameObject);
         }
     }
 }
