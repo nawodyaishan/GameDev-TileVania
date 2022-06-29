@@ -10,15 +10,18 @@ namespace Assets.Scripts
 
         private Rigidbody2D myRigidBody;
         private Animator myAnimator;
+        private CapsuleCollider2D myPlayerCollider;
 
         [SerializeField] float runSpeed = 10f;
         [SerializeField] float jumpSpeed = 10f;
+        [SerializeField] private float climbSpeed = 10f;
 
 
         void Start()
         {
             myRigidBody = GetComponent<Rigidbody2D>();
             myAnimator = GetComponent<Animator>();
+            myPlayerCollider = GetComponent<CapsuleCollider2D>();
         }
 
 
@@ -28,6 +31,7 @@ namespace Assets.Scripts
             FlipSprite();
         }
 
+        /*
         private void JumpAnimation()
         {
             bool isPlayerMovementJump = Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon; // Epsilon is way of 0 
@@ -36,7 +40,7 @@ namespace Assets.Scripts
             {
                 transform.localScale = new Vector2(1f, Mathf.Sign(myRigidBody.velocity.y));
             }
-        }
+        }*/
 
         private void FlipSprite()
         {
@@ -58,13 +62,17 @@ namespace Assets.Scripts
         // Adding Velocity
         void OnJump(InputValue value)
         {
+            // TODO - Implement Jump retuen using LayerMask.GetMask
+            if (!myPlayerCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+                return;
+
             if (value.isPressed)
             {
                 myRigidBody.velocity += new Vector2(0f, jumpSpeed);
             }
         }
 
-        void Jump()
+        /*void Jump()
         {
             Vector2 playerJump = new Vector2(myRigidBody.velocity.x, jumpInput.y * jumpSpeed);
             myRigidBody.velocity = playerJump;
@@ -79,7 +87,7 @@ namespace Assets.Scripts
             {
                 myAnimator.SetBool("IsJump", false);
             }
-        }
+        }*/
 
         // Assigning Velocity
         void Run()
@@ -97,6 +105,16 @@ namespace Assets.Scripts
             {
                 myAnimator.SetBool("IsRunning", false);
             }
+        }
+
+
+        void ClimbLadder()
+        {
+            if (!myPlayerCollider.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+                return;
+
+            Vector2 climbVelocity = new Vector2(myRigidBody.velocity.x, moveInput.y * climbSpeed);
+            myRigidBody.velocity = climbVelocity;
         }
     }
 }
