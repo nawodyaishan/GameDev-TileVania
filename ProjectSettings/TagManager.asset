@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet
   - Interactables
+  - Pickups
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Hazards
   - Bullet
   - Interactables
-  - 
+  - Pickups
   - 
   - 
   - 
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: Interactables
     uniqueID: 1242167203
+    locked: 0
+  - name: Pickups
+    uniqueID: 1798450913
     locked: 0
   - name: Enemy
     uniqueID: 2373444543
