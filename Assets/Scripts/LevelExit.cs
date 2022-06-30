@@ -13,6 +13,11 @@ namespace Assets.Scripts
         // Coroutine for loading next level delay
         void OnTriggerEnter2D(Collider2D col)
         {
+            if (col.CompareTag("Player"))
+            {
+                StartCoroutine(LoadNextLevel());
+            }
+
             StartCoroutine(LoadNextLevel());
         }
 

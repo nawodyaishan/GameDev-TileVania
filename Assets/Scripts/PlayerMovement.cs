@@ -56,6 +56,7 @@ namespace Assets.Scripts
                 isAlive = false;
                 myAnimator.SetTrigger("Dying");
                 myRigidBody.velocity = deathVelocity;
+                FindObjectOfType<GameSession>().ProcessPlayerDeath();
             }
         }
 

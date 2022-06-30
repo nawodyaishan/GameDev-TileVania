@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
     public class GameSession : MonoBehaviour
     {
-        private int playerLives;
+        [SerializeField] private int playerLives = 3;
 
         void Awake()
         {
@@ -24,7 +24,7 @@ namespace Assets.Scripts
 
         public void ProcessPlayerDeath()
         {
-            if (playerLives < 1)
+            if (playerLives > 1)
             {
                 TakeLife();
             }
