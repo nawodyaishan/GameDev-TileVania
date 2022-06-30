@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class ScenePesist : MonoBehaviour
+    public class ScenePersist : MonoBehaviour
     {
         void Awake()
         {
-            int numGameSessions = FindObjectsOfType<ScenePesist>().Length;
+            int numGameSessions = FindObjectsOfType<ScenePersist>().Length;
 
             if (numGameSessions > 1)
             {

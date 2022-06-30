@@ -32,7 +32,7 @@ namespace Assets.Scripts
                 nextSceneIndex = 0;
             }
 
-            FindObjectOfType<ScenePesist>().ResetScreenPersist();
+            FindObjectOfType<ScenePersist>().ResetScreenPersist();
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
