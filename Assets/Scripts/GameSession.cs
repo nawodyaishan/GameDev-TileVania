@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,13 @@ namespace Assets.Scripts
     public class GameSession : MonoBehaviour
     {
         [SerializeField] private int playerLives = 3;
+
+        [SerializeField] private TextMeshProUGUI livesText;
+
+        [SerializeField] TextMeshProUGUI scoreText;
+
+        private int gameScore = 0;
+
 
         void Awake()
         {
@@ -20,6 +28,12 @@ namespace Assets.Scripts
             {
                 DontDestroyOnLoad(gameObject);
             }
+        }
+
+        void Start()
+        {
+            livesText.text = playerLives.ToString();
+            scoreText.text = gameScore.ToString();
         }
 
         public void ProcessPlayerDeath()
@@ -38,6 +52,7 @@ namespace Assets.Scripts
         {
             SceneManager.LoadScene(0);
             Destroy(gameObject);
+            livesText.text = playerLives.ToString();
         }
 
         private void TakeLife()
@@ -45,6 +60,12 @@ namespace Assets.Scripts
             playerLives--;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex);
+        }
+
+        public void AddToScore(int pointsToAdd)
+        {
+            gameScore += pointsToAdd;
+            scoreText.text = gameScore.ToString();
         }
     }
 }
