@@ -1,20 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ScenePesist : MonoBehaviour
+namespace Assets.Scripts
 {
-    void Awake()
+    public class ScenePesist : MonoBehaviour
     {
-        int numGameSessions = FindObjectsOfType<ScenePesist>().Length;
+        void Awake()
+        {
+            int numGameSessions = FindObjectsOfType<ScenePesist>().Length;
 
-        if (numGameSessions > 1)
+            if (numGameSessions > 1)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+        }
+
+        public void ResetScreenPersist()
         {
             Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
         }
     }
 }

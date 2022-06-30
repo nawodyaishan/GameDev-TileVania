@@ -50,6 +50,7 @@ namespace Assets.Scripts
 
         private void ResetGameSession()
         {
+            FindObjectOfType<ScenePesist>().ResetScreenPersist();
             SceneManager.LoadScene(0);
             Destroy(gameObject);
             livesText.text = playerLives.ToString();
